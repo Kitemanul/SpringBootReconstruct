@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.graduationrecons.Dao.Temperature.TemperatureMapper">
+
+    <select id="SearchTemperature"  parameterType="map" resultMap="temperaturemap" statementType="STATEMENT">
+        select 组号,时间,${map.jarid} from 温度数据 where 组号=${map.groupid} and (${map.jarid} between 1 and 50 ) and (时间
+        <choose>
+            <when test="map.outtime=''">
+                >${map.intime}
+            </when>
+            <otherwise>
+                between ${map.intime} and ${map.outtime}
+            </otherwise>
+        </choose>
+        )order by 时间
+    </select>
+    <resultMap id="temperaturemap" type="com.graduationrecons.POJO.WorkShop">
+        <result property="time" column="时间"/>
+        <result property="groupid" column="组号"/>
+        <result property="Teperatrue1" column="罐1" />
+        <result property="Teperatrue2" column="罐2" />
+        <result property="Teperatrue3" column="罐3" />
+        <result property="Teperatrue4" column="罐4" />
+        <result property="Teperatrue5" column="罐5" />
+        <result property="Teperatrue6" column="罐6" />
+        <result property="Teperatrue7" column="罐7" />
+        <result property="Teperatrue8" column="罐8" />
+        <result property="Teperatrue9" column="罐9" />
+        <result property="Teperatrue10" column="罐10" />
+        <result property="Teperatrue11" column="罐11" />
+        <result property="Teperatrue12" column="罐12" />
+        <result property="Teperatrue13" column="罐13" />
+        <result property="Teperatrue14" column="罐14" />
+        <result property="Teperatrue15" column="罐15" />
+        <result property="Teperatrue16" column="罐16" />
+        <result property="Teperatrue17" column="罐17" />
+        <result property="Teperatrue18" column="罐18" />
+        <result property="Teperatrue19" column="罐19" />
+        <result property="Teperatrue20" column="罐20" />
+        <result property="Teperatrue21" column="罐21" />
+        <result property="Teperatrue22" column="罐22" />
+        <result property="Teperatrue23" column="罐23" />
+        <result property="Teperatrue24" column="罐24" />
+        <result property="Teperatrue25" column="罐25" />
+        <result property="Teperatrue26" column="罐26" />
+        <result property="Teperatrue27" column="罐27" />
+        <result property="Teperatrue28" column="罐28" />
+        <result property="Teperatrue29" column="罐29" />
+        <result property="Teperatrue30" column="罐30" />
+    </resultMap>
+
+    <select id="SearchErrorTemperature" statementType="STATEMENT" resultMap="temperaturemap">
+        select 组号,时间,${map.jarid} from 温度数据1  where 组号 = ${map.groupid} order by 时间
+    </select>
+
+</mapper>

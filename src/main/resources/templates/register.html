@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <link rel="icon" th:href=@{favicon.ico}>
+
+    <title>Signin Template for Bootstrap</title>
+    <script type="text/javascript" th:src=@{/js/jquery-1.8.0.min.js}></script>
+    <!-- Bootstrap core CSS -->
+    <link th:href=@{/css/bootstrap.min.css} rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href=@{/css/signin.css} rel="stylesheet">
+  </head>
+
+  <body class="text-center">
+    <form class="form-signin" th:action="@{/user/register.do}" method="post" >
+      <img class="mb-4" th:src=@{/assets/brand/bootstrap-solid.svg} alt="" width="72" height="72">
+      <h1 class="h3 mb-3 font-weight-normal">注册</h1>
+      <p style="color:red" th:text=${msg}></p>
+      <label for="inputUsername" class="sr-only">用户名</label>
+      <input type="text" name="username" id="inputUsername" class="form-control" placeholder="用户名" required>
+
+      <label for="inputEmail" name="email" class="sr-only">邮箱</label>
+      <input type="email" style="margin-top:5px" id="inputEmail" class="form-control" placeholder="邮箱" required autofocus>
+
+      <div class="input-group">
+        <label for="inputCode" class="sr-only">验证码</label>
+        <input type="text" name="code" style="margin-top:5px;margin-right: 10px;width: 50%;display: inline-block;" id="inputCode" class="form-control" placeholder="验证码" required="">
+        <button id="sc" class="btn btn-lg btn-primary btn-block" type="button" onclick="sendcode()" style="
+          width: 30%;
+          margin-top: 5px;
+          display: inline-block;
+          font-size: small;
+          padding-left: 10px;
+         ">获取验证码</button>
+      </div>
+
+
+      <label for="inputPassword" class="sr-only">密码</label>
+      <input type="password" name="mm" style="margin-top:5px;margin-bottom: 5px;" id="inputPassword" class="form-control" placeholder="密码" required>
+      <label for="inputPassword" class="sr-only">密码</label>
+      <input type="password" name="repeatemm" style="margin-top:5px" id="inputrepeatePassword" class="form-control" placeholder="请重新输入密码" required>
+
+
+      <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
+      <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+    </form>
+    <script>
+
+       var token=$("meta[name='_csrf']").attr("content");
+            var header=$("meta[name='_csrf_header']").attr("content");
+            $(document).ajaxSend(function (e,xhr,options) {
+                xhr.setRequestHeader(header,token);
+            })
+
+
+       function sendcode() {
+           $("#sc").attr("disabled", true);
+           $("#sc").css("background", "grey");
+           setTimeout("buttonrecover()",60000)
+           $.ajax({
+               type:"post",
+               url:"/user/sendcode.do",
+               data:{
+                   "email":document.getElementById('inputEmail').value
+               },
+               dataType:"text",
+               async:true,
+               error:function()
+               {    alert("错误");}
+           });
+       }
+
+       function buttonrecover() {
+           $("#sc").attr("disabled", false);
+           $("#sc").css("background", "#007bff");
+
+       }
+    </script>
+  </body>
+</html>
+
+

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.graduationrecons.Dao.User.UserMapper" >
+
+    <update id="UpdateUser">
+        update UserManagement set username =#{user.username},mm=#{user.mm},permission=#{user.permission} where username=#{oldusername}
+    </update>
+
+    <select id="getUsers" resultType="com.graduationrecons.POJO.User">
+        select * from UserManagement
+        <where>
+            <if test="username!=''">
+                username=#{username}
+            </if>
+            <if test="permission!=0">
+                permission=#{permission}
+            </if>
+        </where>
+    </select>
+
+</mapper>

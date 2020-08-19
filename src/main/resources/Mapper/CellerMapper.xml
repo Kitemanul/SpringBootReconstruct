@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.graduationrecons.Dao.Celler.CellerMapper" >
+
+    <select id="SelectAllCeller" resultMap="CellerMap">
+         select * from 出窖入窖
+         <where>
+             <if test="groupid !=0" >
+                 and 组号=#{groupid}
+             </if>
+             <if test="jarid !=0">
+                 and 罐号=#{jarid}
+             </if>
+             <if test="period !=-1">
+                 and 周期=#{period}
+             </if>
+             <if test="intime !=null">
+                 and (入窖时间 between #{intime} and #{intime} )
+                 and (出窖时间 between #{outtime}  and #{outtime} )
+             </if>
+         </where>
+    </select>
+    <resultMap id="CellerMap" type="com.graduationrecons.POJO.CellerInOut">
+        <result property="period" column="周期"/>
+        <result property="groupid" column="组号"/>
+        <result property="jarid" column="罐号"/>
+        <result property="time" column="时间"/>
+        <result property="intime" column="入窖时间"/>
+        <result property="outtime" column="出窖时间"/>
+        <result property="Etime" column="预期时间"/>
+        <result property="id" column="自动编号"/>
+    </resultMap>
+
+</mapper>

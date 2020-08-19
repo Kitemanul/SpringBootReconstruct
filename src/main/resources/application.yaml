@@ -1,0 +1,41 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://localhost:1433;DatabaseName=graduation_design
+    username: sa
+    password: 123
+    type: com.alibaba.druid.pool.DruidDataSource
+
+    druid:
+      break-after-acquire-failure: true
+      connection-error-retry-attempts: 5
+  thymeleaf:
+    cache: false
+
+  mail:
+    password: stzagkclekzdigef
+    host: smtp.qq.com
+    username: 1525378562@qq.com
+    default-encoding: utf-8
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+            required: true
+          timeout: 10000
+          connectiontimeout: 10000
+          writetimeout: 10000
+logging:
+  file:
+    path: ./log
+  level:
+    com.graduationrecons.Controller: debug
+    com.graduationrecons.Dao: debug
+
+mybatis:
+  mapper-locations: Mapper/*.xml
+  type-aliases-package: com.graduationrecons.POJO

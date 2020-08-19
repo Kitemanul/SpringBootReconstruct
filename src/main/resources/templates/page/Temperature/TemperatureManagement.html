@@ -34,7 +34,7 @@
   <script type="text/javascript" th:src="@{/datatable/dataTables.bootstrap4.min.js}"></script>
 
   <!-- page script -->
-  <script th:src="@{/js/RegisterUserManagement.js}"></script>
+  <script th:src="@{/js/TemperatureManagement.js}"></script>
   <link rel="stylesheet" th:href="@{/datatable/datatables.css}">
   <link rel="stylesheet" th:href="@{/dist/css/adminlte.min.css}">
 
@@ -277,7 +277,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>注册用户管理</h1>
+            <h1>温度查询</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -296,13 +296,90 @@
       <div class="card">
 
         <div class="input-group mb-3" style="margin-top: 30px">
+        <div class="input-group-prepend" style="width: 10%;margin-left: 3px">
+          <span class="input-group-text" >组号</span>
+          <select class="selectpicker" id="groupid" value="1" placeholder="1号">
+            <option value="1">1组</option>
+            <option value="2">2组</option>
+            <option value="3">3组</option>
+            <option value="4">4组</option>
+            <option value="5">5组</option>
+            <option value="6">6组</option>
+            <option value="7">7组</option>
+            <option value="8">8组</option>
+            <option value="9">9组</option>
+            <option value="10">10组</option>
+          </select>
+        </div>
 
-          <div class="input-group-prepend" style="width: 15%;margin-left: 20px">
-            <span class="input-group-text" >用户名</span>
-            <input id="userid" type="text" class="form-control" aria-label="Username"  aria-describedby="basic-addon1">
-          </div>
+        <div class="input-group-prepend" style="width: 10%;margin-left: 3px">
+          <span class="input-group-text" >罐号</span>
+          <select class="selectpicker" id="jarid" value="2" placeholder="罐2">
+            <option value="1" >罐1</option>
+            <option value="2" >罐2</option>
+            <option value="3">罐3</option>
+            <option value="4">罐4</option>
+            <option value="5">罐5</option>
+            <option value="6">罐6</option>
+            <option value="7">罐7</option>
+            <option value="8">罐8</option>
+            <option value="9">罐9</option>
+            <option value="10">罐10</option>
+            <option value="11">罐11</option>
+            <option value="12">罐12</option>
+            <option value="13">罐13</option>
+            <option value="14">罐14</option>
+            <option value="15">罐15</option>
+            <option value="16">罐16</option>
+            <option value="17">罐17</option>
+            <option value="18">罐18</option>
+            <option value="19">罐19</option>
+            <option value="20">罐20</option>
+            <option value="21">罐21</option>
+            <option value="22">罐22</option>
+            <option value="23">罐23</option>
+            <option value="24">罐24</option>
+            <option value="25">罐25</option>
+            <option value="26">罐26</option>
+            <option value="27">罐27</option>
+            <option value="28">罐28</option>
+            <option value="29">罐29</option>
+            <option value="30">罐30</option>
+          </select>
+        </div>
 
-          <button type="button" class="btn btn-lg btn-primary" style="padding-top: 2px; padding-bottom: 2px;margin-left: 3px" onclick="reloadTable()">搜索</button>
+        <div class="input-group-prepend" style="width: 10%;margin-left: 3px">
+          <span class="input-group-text" >周期</span>
+          <select class="selectpicker" id="period" value="1" placeholder="1">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+          </select>
+        </div>
+        <div class="input-group-prepend" style="width: 10%;margin-left: 3px">
+          <span class="input-group-text" >变化率</span>
+          <select class="selectpicker" id="rate" value="1" placeholder="每小时">
+            <option value="1">每小时</option>
+            <option value="6">每六小时</option>
+            <option value="12">每天</option>
+            <option value="84">每周</option>
+          </select>
+        </div>
+
+
+          <button type="button" class="btn btn-lg btn-primary" style="padding-top: 2px; padding-bottom: 2px;margin-left: 50px" onclick="reloadTable()">搜索</button>
+
         </div>
 
         <div >
@@ -310,10 +387,12 @@
             <thead>
             <tr >
               <!--<th>#</th>-->
-              <th>用户</th>
-              <th>权限</th>
-              <th>审核状态</th>
-              <th>操作</th>
+              <th>时间</th>
+              <th>组号</th>
+              <th>罐号</th>
+              <th>温度</th>
+              <th>周期</th>
+              <th>变化率</th>
 
             </tr>
             </thead>
@@ -333,7 +412,6 @@
   <div class="modal fade" id="Modal_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <form action="/Celler/register" method="post" class="bs-example bs-example-form" >
           <div class="modal-header">
             <h4 class="modal-title" id="myModalLabel">修改</h4>
           </div>

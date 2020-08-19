@@ -21,9 +21,9 @@ public class MymvcConfig implements WebMvcConfigurer {
         registry.addViewController("/Celler/CellerManagement").setViewName("page/Celler/CellerManagement");
         registry.addViewController("/User/UserManagement").setViewName("page/User/UserManagement");
         registry.addViewController("/User/RegisterUserManagement").setViewName("page/User/RegisterUserManagement");
-
-
-
+        registry.addViewController("/Temperature/TemperatureManagement").setViewName("page/Temperature/TemperatureManagement");
+        registry.addViewController("/Temperature/ErrorTemperature").setViewName("page/Temperature/ErrorTemperature");
+        registry.addViewController("/Temperature/TemperatureCompare").setViewName("page/Temperature/TemperatureCompare");
 
     }
 

@@ -19,7 +19,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        log.info(authentication.getName());
+        log.info("登录者为:"+authentication.getName());
+        log.info("权限为:"+authentication.getPrincipal().toString());
         request.getSession().setAttribute("username",authentication.getName());
         response.sendRedirect("/index");
     }

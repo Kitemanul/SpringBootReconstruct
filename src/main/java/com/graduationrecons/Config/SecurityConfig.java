@@ -39,8 +39,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                  .antMatchers("/dist/**").permitAll()
                  .antMatchers("/plugin/**").permitAll()
                  .antMatchers("/datatable/**").permitAll()
-                 .antMatchers("/user/sendcode.do").authenticated()
-                 .antMatchers("/**/*.do").authenticated()
+                 .antMatchers("/user/**").hasRole("1")
+                 .antMatchers("/Temperature/**").authenticated()
+                 .antMatchers("/Celler/**").authenticated()
                  .antMatchers("/index").hasAnyRole("1","2")
                  .and()
                  .logout()
@@ -61,13 +62,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-     //auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder()).withUser("root").password("123").disabled(false);
+
        auth.userDetailsService(loginUserDetailService).passwordEncoder(new BCryptPasswordEncoder());
-
-
-
-
-
 
 
     }

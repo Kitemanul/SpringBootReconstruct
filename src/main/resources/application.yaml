@@ -2,6 +2,7 @@ server:
   port: 8080
 
 spring:
+
   datasource:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     url: jdbc:sqlserver://localhost:1433;DatabaseName=graduation_design
@@ -29,6 +30,7 @@ spring:
           timeout: 10000
           connectiontimeout: 10000
           writetimeout: 10000
+
 logging:
   file:
     path: ./log

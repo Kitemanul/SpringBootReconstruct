@@ -48,8 +48,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                  .logoutUrl("/logout.do")
                  .and()
                  .rememberMe()
-
-
                  ;
 
 

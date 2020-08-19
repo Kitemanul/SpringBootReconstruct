@@ -12,15 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
 
 @Controller
 @Api("窖池控制类")
@@ -34,9 +32,11 @@ public class CellerController {
 
     @InitBinder
     protected void init(HttpServletRequest request, ServletRequestDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+        SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat1, true));
     }
 
     @PostMapping("/CellerData.do")
@@ -72,6 +72,58 @@ public class CellerController {
         jsonObject.put("data",jsonArray);
         return  jsonObject.toString();
 
+    }
+
+    @PostMapping("/RemoveCeller")
+    @ResponseBody
+    @ApiOperation("删除窖池数据")
+    public String RemoveCeller(CellerInOut celler)
+    {
+        log.info(celler.toString());
+        int row=cellerService.DeleteCeller(celler);
+
+        if(row==1)
+        {
+            log.info("删除成功");
+            return "删除成功";
+        }
+        else
+        {   log.info("删除失败");
+            return "删除失败";
+        }
+    }
+
+    @PostMapping("/EditCeller")
+    @ResponseBody
+    @ApiOperation("修改窖池数据")
+    public String EditCeller(@RequestBody List<CellerInOut> cellers)
+    {
+        log.info(cellers.toString());
+        int row=cellerService.EditCeller(cellers.get(0),cellers.get(1));
+        if(row==1)
+        {
+            return "编辑成功";
+        }
+        else {
+            return "编辑失败";
+        }
+
+    }
+
+    @RequestMapping("/AddCeller")
+    @ResponseBody
+    @ApiOperation("添加窖池数据")
+    public String AddCeller(CellerInOut celler)
+    {
+        int row=cellerService.AddCeller(celler);
+        if(row==1)
+        {
+            return "录入成功";
+        }
+        else
+        {
+            return "录入失败";
+        }
     }
 
 }

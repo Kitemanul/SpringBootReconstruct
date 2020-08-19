@@ -19,6 +19,7 @@
   <link rel="stylesheet" th:href="@{https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css}">
   <link rel="stylesheet" th:href="@{/dist/css/bootstrap-datepicker3.min.css}"></link>
 
+
   <!-- jQuery -->
   <script th:src="@{/dist/js/bootstrap-datepicker.zh-CN.min.js}"></script>
   <script th:src="@{/dist/js/bootstrap-datepicker.js}"></script>
@@ -33,7 +34,7 @@
   <script type="text/javascript" th:src="@{/datatable/dataTables.bootstrap4.min.js}"></script>
 
   <!-- page script -->
-  <script th:src="@{/js/Celler.js}"></script>
+  <script th:src="@{/js/RegisterUserManagement.js}"></script>
   <link rel="stylesheet" th:href="@{/datatable/datatables.css}">
   <link rel="stylesheet" th:href="@{/dist/css/adminlte.min.css}">
 
@@ -247,13 +248,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a th:href="@{pages/charts/chartjs.html}" class="nav-link">
+                <a th:href="@{/User/UserManagement}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>用户管理</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a th:href="@{pages/charts/flot.html}" class="nav-link">
+                <a th:href=@{/User/RegisterUserManagement} class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>注册用户管理</p>
                 </a>
@@ -276,7 +277,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>jsGrid</h1>
+            <h1>注册用户管理</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -288,58 +289,31 @@
       </div><!-- /.container-fluid -->
     </section>
 
+
     <!-- Main content -->
     <section class="content">
+
       <div class="card">
 
-        <form name="search" class="wu-toolbar-search">
+        <div class="input-group mb-3" style="margin-top: 30px">
 
+          <div class="input-group-prepend" style="width: 15%;margin-left: 20px">
+            <span class="input-group-text" >用户名</span>
+            <input id="userid" type="text" class="form-control" aria-label="Username"  aria-describedby="basic-addon1">
+          </div>
 
-          <div class="input-group mb-3" style="margin-top: 30px">
-
-              <div style="margin-left:20px">
-                <div class="input-group input-daterange">
-                <input id="WHC_PayDate" name="WHC_PayDate" type="text" placeholder="入窖日期(起)" data-date-format="yyyy-mm-dd" class="form-control"/>
-                <div class="input-group-addon">~</div>
-                <input id="WHC_PayDate2" name="WHC_PayDate" type="text" placeholder="出窖日期(止)" data-date-format="yyyy-mm-dd" class="form-control"/>
-                 </div>
-              </div>
-
-
-              <div class="input-group-prepend" style="width: 15%;margin-left: 3px">
-                <span class="input-group-text" >组号</span>
-                <input id="groupid" type="text" class="form-control" aria-label="Username"  aria-describedby="basic-addon1">
-              </div>
-
-
-               <div class="input-group-prepend" style="width: 15%;margin-left: 3px">
-                  <span class="input-group-text" >周期</span>
-                 <input id="period" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-               </div>
-
-
-              <div class="input-group-prepend" style="width: 15%;margin-left: 3px">
-                 <span class="input-group-text" >罐号</span>
-                 <input id="jarid" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-              </div>
-
-            <button type="button" class="btn btn-lg btn-primary" style="padding-top: 2px; padding-bottom: 2px;margin-left: 3px" onclick="reloadTable()">搜索</button>
-      </div>
-
-        </form>
-
+          <button type="button" class="btn btn-lg btn-primary" style="padding-top: 2px; padding-bottom: 2px;margin-left: 3px" onclick="reloadTable()">搜索</button>
+        </div>
 
         <div >
           <table id="example1"   style="width:100%">
             <thead>
             <tr >
               <!--<th>#</th>-->
-              <th>时间</th>
-              <th>入窖时间</th>
-              <th>出窖时间</th>
-              <th>周期</th>
-              <th>组号</th>
-              <th>罐号</th>
+              <th>用户</th>
+              <th>权限</th>
+              <th>审核状态</th>
+              <th>操作</th>
 
             </tr>
             </thead>
@@ -354,6 +328,39 @@
     </section>
     <!-- /.content -->
   </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Modal_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form action="/Celler/register" method="post" class="bs-example bs-example-form" >
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">修改</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-xs-8 col-xs-offset-2">
+                <div class="input-group">
+                  <span class="input-group-addon">用户名</span>
+                  <input type="text" id="username_edit" name="cardnumber" class="form-control"  max="8" pattern="[0-9]{8}" title="请输入正确8位卡号" >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            <button type="button" class="btn btn-primary" onclick="EditUser()">确认</button>
+          </div>
+        </form>
+
+
+
+      </div>
+    </div>
+  </div>
+
+
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="float-right d-none d-sm-block">

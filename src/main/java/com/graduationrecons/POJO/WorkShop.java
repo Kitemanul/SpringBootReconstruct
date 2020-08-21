@@ -3,11 +3,12 @@ package com.graduationrecons.POJO;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @ToString
-public class WorkShop {
+public class WorkShop implements Serializable {
 
     private int id;
     private Date time;

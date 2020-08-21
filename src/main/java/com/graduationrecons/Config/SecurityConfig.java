@@ -1,31 +1,31 @@
 package com.graduationrecons.Config;
 
-import com.graduationrecons.Constant.Constant;
-
+import com.graduationrecons.Handler.AuthenticationPublisher;
 import com.graduationrecons.Handler.LoginSuccessHandler;
 import com.graduationrecons.Service.LoginService.LoginUserDetailService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.util.matcher.AndRequestMatcher;
 
 
 @EnableWebSecurity
+@Slf4j
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     LoginSuccessHandler loginSuccessHandler;
+
+
     @Override
     //授权
     protected void configure(HttpSecurity http) throws Exception {
 
          http.formLogin()
                  .loginPage(SecurityConstant.LoginPage)
+                 //登录请求URL
                  .loginProcessingUrl(SecurityConstant.LogingProcessingUrl)
                  .successHandler(loginSuccessHandler)
                  .failureUrl(SecurityConstant.LoginFailUrl)
@@ -51,19 +51,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                  .rememberMe()
                  ;
 
-
-
     }
 
     @Autowired
     private LoginUserDetailService loginUserDetailService;
 
+    @Autowired
+    private AuthenticationPublisher authenticationPublisher;
+
     //认证/
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
+        //认证成功或失败通知类
 
-       auth.userDetailsService(loginUserDetailService).passwordEncoder(new BCryptPasswordEncoder());
+       auth.userDetailsService(loginUserDetailService).passwordEncoder(new BCryptPasswordEncoder())
+       .and()
+       .authenticationEventPublisher(authenticationPublisher);
+
+
 
 
     }

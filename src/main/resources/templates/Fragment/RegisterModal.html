@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<div class="modal fade" id="Modal_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action="/Celler/register" method="post" class="bs-example bs-example-form" >
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">修改</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-xs-8 col-xs-offset-2">
+                            <div class="input-group">
+                                <span class="input-group-addon">用户名</span>
+                                <input type="text" id="username_edit" name="cardnumber" class="form-control"  max="8" pattern="[0-9]{8}" title="请输入正确8位卡号" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" onclick="EditUser()">确认</button>
+                </div>
+            </form>
+
+
+
+        </div>
+    </div>
+</div>
+</html>

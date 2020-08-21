@@ -7,6 +7,7 @@ import com.graduationrecons.POJO.WorkShop;
 
 import com.graduationrecons.Util.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class TemperatureServiceImpl implements TemperatureService {
     }
 
     @Override
+    @Cacheable(value="temperateerrordata")
     public List<WorkShop> SearchErrorTempearture(WorkShop workShop) {
 
         HashMap<String,String> map=new HashMap<>();
@@ -49,6 +51,7 @@ public class TemperatureServiceImpl implements TemperatureService {
     }
 
     @Override
+    @Cacheable(value="temperatedata")
     public List<WorkShop> SearchTempearture(int rate, CellerInOut in) {
 
         List<CellerInOut> list=cellerMapper.SelectAllCeller(in);

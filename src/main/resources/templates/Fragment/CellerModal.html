@@ -1,0 +1,120 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+
+<div th:frgment="delete_modal" class="modal fade" id="delcfmModel">
+    <div class="modal-dialog">
+        <div class="modal-content message_align">
+            <div class="modal-header">
+                <h4 class="modal-title">提示信息</h4>
+            </div>
+            <div class="modal-body">
+                <p>您确认要删除吗？</p>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" id="url"/>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <a  onclick="remove()" class="btn btn-success" data-dismiss="modal">确定</a>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div th:frgment="add_modal" class="modal fade" id="Modal_add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form >
+                <div class="modal-header">
+                    <h4 class="modal-title" id="ModalLabel">添加</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-xs-8 col-xs-offset-2">
+                            <div class="input-group">
+                                <span class="input-group-addon">时间</span>
+                                <input type="text" id="time_add" name="cardnumber" class="form-control" value="2017-11-17 08:46:36.000" max="8" pattern="[0-9]{8}" title="请输入正确8位卡号" >
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">入窖时间</span>
+                                <input type="text" id="intime_add" name="cardnumber" class="form-control" value="2017-11-17 08:46:36.000" max="8" pattern="[0-9]{8}" title="请输入正确8位卡号" >
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">出窖时间</span>
+                                <input type="text" id="outtime_add" name="cardnumber" class="form-control" value="2017-11-17 08:46:36.000" max="8" pattern="[0-9]{8}" title="请输入正确8位卡号" >
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">罐号</span>
+                                <input type="text" id="jarid_add" name="cardnumber" class="form-control" value="1" max="8" pattern="[0-9]{8}" title="请输入正确8位卡号" >
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">组号</span>
+                                <input type="text" id="groupid_add" name="cardnumber" class="form-control" value="1" max="8" pattern="[0-9]{8}" title="请输入正确8位卡号" >
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">周期</span>
+                                <input type="text" id="period_add" name="cardnumber" class="form-control" value="1" max="8" pattern="[0-9]{8}" title="请输入正确8位卡号" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" onclick="Add()">确认</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div th:frgment="edit_modal" class="modal fade" id="Modal_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form  class="bs-example bs-example-form" >
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">修改</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-xs-8 col-xs-offset-2">
+                            <div class="input-group">
+                                <span class="input-group-addon">时间</span>
+                                <input type="text" id="time" name="cardnumber" class="form-control"  max="8" pattern="[0-9]{8}" title="请输入正确8位卡号" >
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">入窖时间</span>
+                                <input type="text" id="intime" name="cardnumber" class="form-control"  max="8" pattern="[0-9]{8}" title="请输入正确8位卡号" >
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">出窖时间</span>
+                                <input type="text" id="outtime" name="cardnumber" class="form-control"  max="8" pattern="[0-9]{8}" title="请输入正确8位卡号" >
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">罐号</span>
+                                <input type="text" id="jarid_edit" name="cardnumber" class="form-control"  max="8" pattern="[0-9]{8}" title="请输入正确8位卡号" >
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">组号</span>
+                                <input type="text" id="groupid_edit" name="cardnumber" class="form-control"  max="8" pattern="[0-9]{8}" title="请输入正确8位卡号" >
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">周期</span>
+                                <input type="text" id="period_edit" name="cardnumber" class="form-control"  max="8" pattern="[0-9]{8}" title="请输入正确8位卡号" >
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" onclick="EditCeller()">确认</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+</html>
+

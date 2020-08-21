@@ -1,7 +1,9 @@
 package com.graduationrecons.Service.LoginService;
 
 import com.graduationrecons.POJO.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,9 +19,12 @@ public class LoginUserDetailService implements UserDetailsService {
 
     @Autowired
     UserService userService;
+    @Autowired
+    RedisTemplate redisTemplate;
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+
 
         User user=userService.LoginUser(s);
         if (user == null){

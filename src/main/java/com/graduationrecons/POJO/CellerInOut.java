@@ -3,11 +3,12 @@ package com.graduationrecons.POJO;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @ToString
-public class CellerInOut {
+public class CellerInOut implements Serializable {
 
     private int id;
     private int period=-1;

@@ -1,21 +1,20 @@
 package com.graduationrecons.Controller.UserController;
 
 
-import com.graduationrecons.Constant.Constant;
+import com.graduationrecons.Config.SecurityConstant;
 import com.graduationrecons.POJO.User;
 import com.graduationrecons.Service.EmailService.EmailService;
 import com.graduationrecons.Service.LoginService.UserService;
 import com.graduationrecons.Service.UserManagementService.UserManagementService;
+import com.graduationrecons.Util.MD5Utils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.Logger;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +36,24 @@ public class UserLoginController {
     @Autowired
     EmailService emailService;
 
+
+    @PostMapping("/login.do")
+    @ApiOperation("登录请求")
+    public String UserLogin(User user)
+    {
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(user.getUsername(), MD5Utils.stringToMD5(user.getMm()));
+        try {
+            subject.login(usernamePasswordToken);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return SecurityConstant.LoginFailUrl;
+        }
+
+        return SecurityConstant.HomePage;
+    }
 
 
     @PostMapping("/register.do")

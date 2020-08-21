@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.Random;
 
@@ -39,20 +40,22 @@ public class UserLoginController {
 
     @PostMapping("/login.do")
     @ApiOperation("登录请求")
-    public String UserLogin(User user)
+    public String UserLogin(User user,HttpServletRequest request)
     {
+
         Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(user.getUsername(), MD5Utils.stringToMD5(user.getMm()));
+        log.info(user.getMm());
+        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(user.getUsername(),user.getMm());
         try {
             subject.login(usernamePasswordToken);
         }
         catch (Exception e)
         {
             e.printStackTrace();
-            return SecurityConstant.LoginFailUrl;
+            return "/";
         }
-
-        return SecurityConstant.HomePage;
+        request.getSession().setAttribute("username",user.getUsername());
+        return "index";
     }
 
 

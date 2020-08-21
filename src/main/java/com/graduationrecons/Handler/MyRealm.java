@@ -51,6 +51,7 @@ public class MyRealm extends AuthorizingRealm {
                     throw new AuthenticationException("该账号已被禁用");
                 }
                 log.info("name:"+name+"开始认证"+"realmname"+getName());
+                log.info(user.getMm());
                 user.setUsername(user.getUsername().trim());
                 return new SimpleAuthenticationInfo(user,user.getMm(),getName());
 

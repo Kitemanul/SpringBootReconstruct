@@ -98,7 +98,8 @@ public class CellerController {
     @ApiOperation("修改窖池数据")
     public String EditCeller(@RequestBody List<CellerInOut> cellers)
     {
-        log.info(cellers.toString());
+
+
         int row=cellerService.EditCeller(cellers.get(0),cellers.get(1));
         if(row==1)
         {

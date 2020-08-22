@@ -11,60 +11,43 @@
 
 
     <title>窖池温度管理系统</title>
-    <!-- Tell the browser to be responsive to screen width -->
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" th:href="@{/plugins/fontawesome-free/css/all.min.css}">
-    <link rel="icon" th:href="@{/assets/img/bootstrap-stack.png}">
-    <!-- Ionicons -->
+
+    <link rel="icon" th:href="@{/img/bootstrap-stack.png}">
+
     <link rel="stylesheet" th:href="@{https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css}">
-    <!-- Tempusdominus Bbootstrap 4 -->
-    <link rel="stylesheet" th:href="@{/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css}">
-    <!-- iCheck -->
-    <link rel="stylesheet" th:href="@{/plugins/icheck-bootstrap/icheck-bootstrap.min.css}">
-
-
-    <!-- Theme style -->
-    <link rel="stylesheet" th:href="@{/dist/css/adminlte.min.css}">
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" th:href="@{/plugins/overlayScrollbars/css/OverlayScrollbars.min.css}">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" th:href="@{/plugins/daterangepicker/daterangepicker.css}">
-
-    <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <!-- jQuery -->
-    <script th:src="@{/plugins/jquery/jquery.min.js}"></script>
-    <script type="text/javascript" th:src="@{/jQuery/jquery-3.4.1.js}"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script th:src="@{/plugins/jquery-ui/jquery-ui.min.js}"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-        $.widget.bridge('uibutton', $.ui.button)
-    </script>
-    <!-- Bootstrap 4 -->
-    <script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
-    <!-- Sparkline -->
-    <script th:src="@{/plugins/sparklines/sparkline.js}"></script>
-
-
-    <!-- daterangepicker -->
-    <script th:src="@{/plugins/moment/moment.min.js}"></script>
-    <script th:src="@{/plugins/daterangepicker/daterangepicker.js}"></script>
-    <!-- Tempusdominus Bootstrap 4 -->
-    <script th:src="@{/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/fontawesome-free/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/css/tempusdominus-bootstrap-4.min.css}">
+    <link rel="stylesheet" th:href="@{/css/icheck-bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/OverlayScrollbars.min.css}">
+    <link rel="stylesheet" th:href="@{/css/daterangepicker.css}">
+    <!--<script th:src="@{/js/bootstrap.bundle.min.js}"></script>-->
+    <script th:src="@{/js/sparkline.js}"></script>
+    <script th:src="@{/js/moment.min.js}"></script>
+    <!--<script th:src="@{/js/daterangepicker.js}"></script>-->
+    <!--<script th:src="@{/js/tempusdominus-bootstrap-4.min.js}"></script>-->
+    <!--<script th:src="@{/js/jquery.overlayScrollbars.min.js}"></script>-->
+    <!--<script th:src="@{/js/jquery-ui.min.js}"></script>-->
+    <script th:src="@{/js/jquery.min.js}"></script>
 
 
-    <!-- overlayScrollbars -->
-    <script th:src="@{/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js}"></script>
-    <!-- AdminLTE App -->
-    <script th:src="@{/dist/js/adminlte.js}"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script th:src="@{/dist/js/pages/dashboard.js}"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script th:src="@{/dist/js/demo.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/adminlte.min.css}">
+    <script th:src="@{/js/adminlte.js}"></script>
+    <!--<script th:src="@{/js/dashboard.js}"></script>-->
+    <script th:src="@{/js/demo.js}"></script>
+
+
+    <script type="text/javascript" th:src="@{/js/jQuery-3.4.1.js}"></script>
+
+    <!--<script>-->
+        <!--$.widget.bridge('uibutton', $.ui.button)-->
+    <!--</script>-->
+
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -117,7 +100,7 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a th:href="@{/index}" class="brand-link">
-            <img th:src="@{/dist/img/AdminLTELogo.png}" alt="AdminLTE Logoindex" class="brand-image img-circle elevation-3"
+            <img th:src="@{/img/AdminLTELogo.png}" alt="AdminLTE Logoindex" class="brand-image img-circle elevation-3"
                  style="opacity: .8">
             <span class="brand-text font-weight-light">AdminLTE 3</span>
         </a>
@@ -127,7 +110,7 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img th:src="@{/dist/img/user2-160x160.jpg}" class="img-circle elevation-2" alt="User Image">
+                    <img th:src="@{/img/user2-160x160.jpg}" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
                     <p class="font-italic" style="color: aliceblue" th:text="${session.username}">用户</p>

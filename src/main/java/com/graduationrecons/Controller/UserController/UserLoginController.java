@@ -52,9 +52,10 @@ public class UserLoginController {
         catch (Exception e)
         {
             e.printStackTrace();
-            return "/";
+            request.getSession().setAttribute("username",user.getUsername());
+            return "login";
         }
-        request.getSession().setAttribute("username",user.getUsername());
+
         return "index";
     }
 

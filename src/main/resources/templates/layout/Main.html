@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.w3.org/1999/xhtml"
-      xmlns:sec="http://www.w3.org/1999/xhtml" @taglib prefix="sec" uri=”http://www.springframework.org/security/tags>
+      xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:shiro="http://www.w3.org/1999/xhtml" @taglib prefix="sec"
+      uri=”http://www.springframework.org/security/tags>
 
 
 <head>
@@ -169,7 +170,7 @@
                         </ul>
                     </li>
 
-                        <li class="nav-item has-treeview" sec:authorize="hasRole('1')" >
+                        <li class="nav-item has-treeview" shiro:hasPermission="user:admin" >
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-chart-pie"></i>
                                 <p>
